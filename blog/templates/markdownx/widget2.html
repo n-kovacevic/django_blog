@@ -1,0 +1,17 @@
+<div class="markdownx">
+    <div class="field">
+        {% include 'django/forms/widgets/textarea.html' %}
+    </div>
+    <div class="ui accordion field">
+        <div class="title">
+            <i class="dropdown icon"></i>
+            Preview:
+        </div>
+        <div class="content field">
+            <div class="markdownx-preview ui segment"></div>
+        </div>
+    </div>
+</div>
+<script>
+    $('.accordion').accordion();
+</script>

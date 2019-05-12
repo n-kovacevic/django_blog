@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+{% block title %}
+    Confirm post deletion
+{% endblock %}
+{% block content %}
+    <div class="ui text container">
+        <form method="post" class="ui form segment">
+            {% csrf_token %}
+            <div class="field">
+                <p>Are you sure you want to delete "{{ object.title }}"?</p>
+            </div>
+            <button class="ui basic green button" type="submit" value="Yes">
+                <i class="check icon"></i>
+                Yes
+            </button>
+            <a href="{% url 'blog:post_view' object.pk %}" class="ui basic red button">
+                <i class="x icon"></i>
+                No
+            </a>
+        </form>
+    </div>
+{% endblock %}

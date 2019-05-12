@@ -1,0 +1,40 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block content %}
+    <div class="ui text container segments">
+        <div class="ui segment">
+            <h1 class="ui header">
+                <a href="{% url 'blog:post_delete' object.pk %}" class="right floated ui red basic button">
+                    <i class="trash alternate outline icon"></i>
+                    Delete
+                </a>
+                <a href="{% url 'blog:post_edit' object.pk %}" class="right floated ui basic button">
+                    <i class="pencil alternate icon"></i>
+                    Edit
+                </a>
+                <span>{{ object.title }}</span>
+                <span class="sub header">{{ object.summary }}</span>
+            </h1>
+        </div>
+        <div class="ui basic segment">
+            {% for tag in post.tags.all %}
+                <a href="#" class="ui label">{{ tag }}</a>
+            {% endfor %}
+        </div>
+        <div class="ui segment">
+            {{ object.markdown_content|safe}}
+        </div>
+        <div class="ui secondary segment equal width grid">
+            <div class="column">
+                <i class="user outline icon"></i>
+                {{ post.author.username }}
+            </div>
+            <div class="right aligned column">
+                <i class="calendar alternate outline icon"></i>
+                {{ post.date_created|timesince }} ago
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <div class="ui text container">
+        <form method="post" class="ui form segment">
+            {% csrf_token %}
+            {% include 'blog/form_field.html' with field=form.username icon='user icon' %}
+            <div class="field">
+                <label>Password:</label>
+                <div class="ui message">
+                    Raw passwords are not stored, so there is no way to see this user's password, but you can change the password using <a href="{% url 'accounts:password' %}">this form</a>.
+                </div>
+            </div>
+            <div class="two fields">
+                {% include 'blog/form_field.html' with field=form.first_name %}
+                {% include 'blog/form_field.html' with field=form.last_name %}
+            </div>
+            {% include 'blog/form_field.html' with field=form.email %}
+            <input class="ui primary basic button" type="submit" value="Save">
+            <input class="ui basic button" type="reset" value="Cancel">
+        </form>
+    </div>
+{% endblock %}

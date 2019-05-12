@@ -1,0 +1,38 @@
+{% extends 'blog/base.html' %}
+{% block title %}
+{% if form.title %}
+    Edit post
+{% else %}
+    New post
+{% endif %}
+{% endblock %}
+{% block content %}
+    <div class="ui text container">
+        <form method="post" class="ui form segment">
+            {% csrf_token %}
+            {{ form.errors }}
+            {% include 'blog/form_field.html' with field=form.title %}
+            {% include 'blog/form_field.html' with field=form.summary %}
+            <div class="field" id="tags">
+                {{ form.tags.label }}
+                {{ form.tags }}
+            </div>
+            <div class="field">
+                {{ form.content.label_tag }}
+                {{ form.content }}
+            </div>
+            <div class="field">
+                {{ form.media }}
+            </div>
+
+            <input class="ui primary basic button field" type="submit" value="Save post">
+            <input class="ui basic button field" type="reset" value="Reset">
+        </form>
+    </div>
+
+<script>
+    $('#tags select').addClass('search').dropdown({
+        allowAdditions: true
+    });
+</script>
+{% endblock %}

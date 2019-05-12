@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'blog/base_head.html' %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    {% include 'blog/menu_navbar.html' %}
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>

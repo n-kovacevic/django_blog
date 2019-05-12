@@ -1,0 +1,31 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Blog{% endblock %}
+{% block content %}
+    <div class="ui text container">
+        {% for post in object_list %}
+            <div class="ui segments post">
+                <a href="{% url 'blog:post_view' post.pk %}" class="ui segment"><h2>{{ post.title }}</h2></a>
+                <div class="ui segment">
+                    <div>{{ post.summary }}</div>
+                </div>
+                <div class="ui basic segment">
+                    {% for tag in post.tags.all %}
+                        <a href="{% url 'blog:tag' tag %}" class="ui label">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+                <div class="ui secondary segment equal width grid">
+                    <div class="column">
+                        <i class="user outline icon"></i>
+                        {{ post.author.username }}
+                    </div>
+                    <div class="right aligned column">
+                        <i class="calendar alternate outline icon"></i>
+                        {{ post.date_created|timesince }} ago
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% include 'blog/menu_pagination.html' %}
+    </div>
+{% endblock %}

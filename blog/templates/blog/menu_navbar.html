@@ -1,0 +1,45 @@
+<div class="ui fixed menu">
+    <div class="ui container">
+            <div class="left menu">
+                <a class="header item" href="{% url 'blog:home' %}">
+                    <i class="large  blogger b icon"></i>
+                    Blog
+                </a>
+                <a class="item" href="{% url 'blog:home' %}">Home</a>
+
+                {% if request.user.is_authenticated %}
+                    <div class="item">
+                        <a href="{% url 'blog:post_new' %}" class="ui basic button">
+                            <i class="edit icon"></i>
+                            New post
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="right menu">
+                <div class="item">
+                    <form action="{% url 'blog:search' %}" method="get" class="ui transparent icon input">
+                        <label hidden for="search">Search:</label>
+                        <input id="search" type="text" name="q" placeholder="Search..." >
+                    </form>
+                    <i class="search icon"></i>
+                </div>
+                {% if request.user.is_authenticated %}
+                    <div id="profile_dropdown" class="ui dropdown item">
+                        <span class="text">{{ request.user.username }}</span>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="{% url 'accounts:profile' %}" class="item">Profile</a>
+                            <a href="{% url 'accounts:logout' %}?next={{ request.path }}" class="item">Log out</a>
+                        </div>
+                    </div>
+                    <script>
+                    $('#profile_dropdown').dropdown();
+                    </script>
+                {% else %}
+                    <a class="ui item" href="{% url 'accounts:login'%}?next={% url 'blog:home' %}">Log in</a>
+                    <a class="ui item" href="{% url 'accounts:register'%}">Register</a>
+                {% endif %}
+            </div>
+    </div>
+</div>

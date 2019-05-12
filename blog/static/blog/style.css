@@ -1,0 +1,14 @@
+.post>a.segment{
+    color: inherit;
+    display: block;
+}
+
+#content{
+    position: relative;
+    top: 3.5em;
+    padding: 2em;
+}
+
+.clear{
+    clear: both;
+}
