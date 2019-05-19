@@ -1,6 +1,5 @@
 from typing import Dict, Any, Union
 
-from django.shortcuts import redirect
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
