@@ -36,5 +36,31 @@
                 {{ post.date_created|timesince }} ago
             </div>
         </div>
+        <div class="ui secondary segment">
+            <h3 class="header">
+                {{ post.comment_set.all|length }} comments
+            </h3>
+            {% if request.user.is_authenticated %}
+                <form action="{% url 'blog:post_comment_new' post.pk %}" method="post" class="ui reply form">
+                    {% csrf_token %}
+                    <div class="field">
+                        <label for="comment-area"></label>
+                        <textarea name="comment" id="comment-area" rows="3"></textarea>
+                    </div>
+                    <div class="ui field">
+                        <button type="submit" class="ui button">
+                            <i class="edit icon"></i>
+                            Post comment
+                        </button>
+                    </div>
+                    <div class="clear"></div>
+                </form>
+            {% endif %}
+            <div class="ui comments">
+                {% for comment in post.comment_set.all %}
+                    {% include 'blog/post_comment.html' with comment=comment %}
+                {% endfor %}
+            </div>
+        </div>
     </div>
 {% endblock %}

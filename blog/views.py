@@ -5,8 +5,9 @@ from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404, redirect
 
-from .models import Post, Tag
+from .models import Post, Tag, Comment
 from .forms import PostForm
 
 
@@ -116,3 +117,13 @@ class SearchPostListView(PostListView):
 
     def get_queryset(self):
         return Post.objects.filter(Q(title__contains=self.search_query) | Q(summary__contains=self.search_query))
+
+
+def create_comment(request, post_pk):
+    post = get_object_or_404(Post, pk=post_pk)
+    author = request.user
+    content = request.POST['comment']
+    comment = Comment(author=author, content=content, post=post)
+    comment.save()
+    post.comment_set.add(comment)
+    return redirect('blog:post_view', pk=post_pk)

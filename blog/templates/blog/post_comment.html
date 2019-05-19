@@ -1,0 +1,11 @@
+<div class="comment">
+    <div class="content">
+        <span class="author">
+            {{ comment.author.username }}
+        </span>
+        <div class="metadata">
+            <span class="date">{{ comment.date_created|timesince }}</span>
+        </div>
+        <div class="text">{{ comment.content }}</div>
+    </div>
+</div>
