@@ -1,7 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% block title %}{{ object.title }}{% endblock %}
-
+{% load utils %}
 {% block content %}
     <div class="ui text container segments">
         <div class="ui segment">
@@ -24,7 +24,7 @@
             {% endfor %}
         </div>
         <div class="ui segment">
-            {{ object.markdown_content|safe}}
+            {{ object.content| markdown }}
         </div>
         <div class="ui secondary segment equal width grid">
             <div class="column">

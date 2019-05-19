@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from markdownx.models import MarkdownxField
-from markdownx.utils import markdownify
 
 
 class Tag(models.Model):
@@ -19,10 +18,6 @@ class Post(models.Model):
     date_updated = models.DateTimeField(auto_now=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, blank=True)
     tags = models.ManyToManyField(Tag)
-
-    @property
-    def markdown_content(self):
-        return markdownify(self.content)
 
     class Meta:
         ordering = ['-date_created']
