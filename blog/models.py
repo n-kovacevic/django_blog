@@ -19,6 +19,19 @@ class Post(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, blank=True)
     tags = models.ManyToManyField(Tag)
 
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['-date_created']
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, models.CASCADE)
+    author = models.ForeignKey(User, models.CASCADE)
+    content = models.TextField()
+    date_created = models.DateTimeField(auto_now_add=True, blank=True)
+
     class Meta:
         ordering = ['-date_created']
 

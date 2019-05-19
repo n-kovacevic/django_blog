@@ -2,7 +2,7 @@
     <div class="ui container">
             <div class="left menu">
                 <a class="header item" href="{% url 'blog:home' %}">
-                    <i class="large  blogger b icon"></i>
+                    <i class="large blogger b icon"></i>
                     Blog
                 </a>
                 <a class="item" href="{% url 'blog:home' %}">Home</a>
@@ -10,7 +10,7 @@
                 {% if request.user.is_authenticated %}
                     <div class="item">
                         <a href="{% url 'blog:post_new' %}" class="ui basic button">
-                            <i class="edit icon"></i>
+                            <i class="edit outline icon"></i>
                             New post
                         </a>
                     </div>
