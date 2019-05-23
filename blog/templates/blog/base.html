@@ -7,9 +7,15 @@
 </head>
 <body>
     {% include 'blog/menu_navbar.html' %}
-<div id="content">
+    <div class="clear"></div>
+<div id="sidebar" class="ui sidebar vertical menu">
+    {% include 'blog/menu_links.html' %}
+</div>
+<div id="content" class="pusher">
     {% block content %}
     {% endblock %}
 </div>
+<script>
+</script>
 </body>
 </html>

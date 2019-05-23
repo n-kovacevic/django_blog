@@ -12,3 +12,37 @@
 .clear{
     clear: both;
 }
+
+#sandwich{
+    display: none;
+}
+
+#link-menu{
+    display: flex;
+}
+
+#sidebar{
+    top: 3.5em;
+}
+
+
+@media only screen and (max-width: 720px){
+
+    #sandwich {
+        display: flex;
+    }
+
+    #link-menu{
+        display: none;
+    }
+
+
+    #search-menu form{
+        width: 0;
+    }
+
+    #search-menu:hover form{
+        width: initial;
+    }
+
+}

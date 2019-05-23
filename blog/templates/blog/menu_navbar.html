@@ -1,22 +1,16 @@
 <div class="ui fixed menu">
     <div class="ui container">
-            <div class="left menu">
+                <div id="sandwich" class="item">
+                    <i class="sidebar icon"></i>
+                </div>
                 <a class="header item" href="{% url 'blog:home' %}">
                     <i class="large blogger b icon"></i>
                     Blog
                 </a>
-                <a class="item" href="{% url 'blog:home' %}">Home</a>
-
-                {% if request.user.is_authenticated %}
-                    <div class="item">
-                        <a href="{% url 'blog:post_new' %}" class="ui basic button">
-                            <i class="edit outline icon"></i>
-                            New post
-                        </a>
-                    </div>
-                {% endif %}
+            <div id="link-menu" class="left menu">
+                {% include 'blog/menu_links.html' %}
             </div>
-            <div class="right menu">
+            <div id="search-menu" class="right menu">
                 <div class="item">
                     <form action="{% url 'blog:search' %}" method="get" class="ui transparent icon input">
                         <label hidden for="search">Search:</label>
@@ -43,3 +37,8 @@
             </div>
     </div>
 </div>
+<script>
+    $('#sandwich').click(function () {
+        $('#sidebar').sidebar('toggle');
+    });
+</script>
