@@ -1,5 +1,6 @@
 from typing import Dict, Any, Union
 
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
@@ -134,4 +135,12 @@ def comment_reply(request, post_pk, comment_pk):
     content = request.POST['content']
     reply = Comment(author=author, content=content, parent=comment)
     reply.save()
+    return redirect('blog:post_view', pk=post_pk)
+
+
+@login_required
+def comment_delete(request, post_pk, comment_pk):
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    if comment.author.pk == request.user.pk:
+        comment.delete()
     return redirect('blog:post_view', pk=post_pk)

@@ -9,8 +9,11 @@
         <div class="text">{{ comment.content }}</div>
         <div class="actions">
             <a id="reply-{{ comment.pk }}" class="reply">Reply</a>
+            {% if request.user.is_authenticated and comment.author.pk == request.user.pk %}
+                <a href="{% url 'blog:post_comment_delete' post.pk comment.pk %}" class="reply">Delete</a>
+            {% endif %}
         </div>
-        <form method="post" action="{% url 'blog:post_comment_reply' post.pk comment.id  %}"
+        <form method="post" action="{% url 'blog:post_comment_reply' post.pk comment.pk  %}"
               id="reply-form-{{ comment.pk }}" class="ui reply form" hidden>
             {% csrf_token %}
             <div class="field">
