@@ -1,23 +1,23 @@
 {% extends 'blog/base.html' %}
 
-{% block title %}{{ object.title }}{% endblock %}
+{% block title %}{{ post.title }}{% endblock %}
 {% load utils %}
 {% block content %}
     <div class="ui text container segments">
         <div class="ui segment">
             <h1 class="ui header">
-                {% if request.user.is_authenticated and object.author.pk == request.user.pk %}
-                    <a href="{% url 'blog:post_delete' object.pk %}" class="right floated ui red basic button">
+                {% if user.is_authenticated and post.author == user %}
+                    <a href="{% url 'blog:post_delete' post.pk %}" class="right floated ui red basic button">
                     <i class="trash alternate outline icon"></i>
                     Delete
                     </a>
-                    <a href="{% url 'blog:post_edit' object.pk %}" class="right floated ui basic button">
+                    <a href="{% url 'blog:post_edit' post.pk %}" class="right floated ui basic button">
                         <i class="pencil alternate icon"></i>
                         Edit
                     </a>
                 {% endif %}
-                <span>{{ object.title }}</span>
-                <span class="sub header">{{ object.summary }}</span>
+                <span>{{ post.title }}</span>
+                <span class="sub header">{{ post.summary }}</span>
             </h1>
         </div>
         <div class="ui basic segment">
@@ -26,7 +26,7 @@
             {% endfor %}
         </div>
         <div class="ui segment">
-            {{ object.content| markdown }}
+            {{ post.content| markdown }}
         </div>
         <div class="ui tertiary segment equal width grid">
             <div class="column">
@@ -42,12 +42,12 @@
             <h3 class="header">
                 {{ post.comment_set.all|length }} comments
             </h3>
-            {% if request.user.is_authenticated %}
+            {% if user.is_authenticated %}
                 <form action="{% url 'blog:post_comment_new' post.pk %}" method="post" class="ui reply form">
                     {% csrf_token %}
                     <div class="field">
                         <label for="comment-area"></label>
-                        <textarea name="comment" id="comment-area" rows="3"></textarea>
+                        <textarea name="content" id="comment-area" rows="3"></textarea>
                     </div>
                     <div class="ui field">
                         <button type="submit" class="ui button">

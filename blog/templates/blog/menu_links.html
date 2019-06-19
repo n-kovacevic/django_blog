@@ -1,5 +1,5 @@
 <a class="item" href="{% url 'blog:home' %}">Home</a>
-{% if request.user.is_authenticated %}
+{% if user.is_authenticated %}
     <div class="item">
         <a href="{% url 'blog:post_new' %}" class="ui basic button">
             <i class="edit outline icon"></i>

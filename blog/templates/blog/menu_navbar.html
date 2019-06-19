@@ -18,9 +18,9 @@
                     </form>
                     <i class="search icon"></i>
                 </div>
-                {% if request.user.is_authenticated %}
+                {% if user.is_authenticated %}
                     <div id="profile_dropdown" class="ui dropdown item">
-                        <span class="text">{{ request.user.username }}</span>
+                        <span class="text">{{ user.username }}</span>
                         <i class="dropdown icon"></i>
                         <div class="menu">
                             <a href="{% url 'accounts:profile' %}" class="item">Profile</a>

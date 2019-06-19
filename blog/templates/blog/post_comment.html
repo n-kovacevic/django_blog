@@ -9,7 +9,7 @@
         <div class="text">{{ comment.content }}</div>
         <div class="actions">
             <a id="reply-{{ comment.pk }}" class="reply">Reply</a>
-            {% if request.user.is_authenticated and comment.author.pk == request.user.pk %}
+            {% if user.is_authenticated and comment.author == user %}
                 <a href="{% url 'blog:post_comment_delete' post.pk comment.pk %}" class="reply">Delete</a>
             {% endif %}
         </div>
