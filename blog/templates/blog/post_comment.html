@@ -7,5 +7,28 @@
             <span class="date">{{ comment.date_created|timesince }}</span>
         </div>
         <div class="text">{{ comment.content }}</div>
+        <div class="actions">
+            <a id="reply-{{ comment.pk }}" class="reply">Reply</a>
+        </div>
+        <form method="post" action="{% url 'blog:post_comment_reply' post.pk comment.id  %}"
+              id="reply-form-{{ comment.pk }}" class="ui reply form" hidden>
+            {% csrf_token %}
+            <div class="field">
+                <label>
+                    <textarea name="content"></textarea>
+                </label>
+            </div>
+            <button class="ui basic submit button" type="submit">
+                Add Reply
+            </button>
+        </form>
+        {% if comment.replies.all|length %}
+            <div class="comments">
+            {% for reply in comment.replies.all %}
+                {% include 'blog/post_comment.html' with post=post comment=reply %}
+            {% endfor %}
+            </div>
+        {% endif %}
+
     </div>
 </div>

@@ -63,4 +63,19 @@
             </div>
         </div>
     </div>
+    <script>
+        $('.reply').click(function (e) {
+            var comment_id = e.target.id.replace('reply-', '');
+            console.log(e);
+            console.log(comment_id);
+            console.log('#reply-form-'+comment_id);
+            console.log($('#reply-form-' + comment_id));
+            if ($(e.target).hasClass("active")){
+                $(e.target).removeClass("active");
+            } else {
+                $(e.target).addClass("active");
+            }
+            $('#reply-form-'+comment_id).slideToggle();
+        });
+    </script>
 {% endblock %}

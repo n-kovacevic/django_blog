@@ -27,10 +27,11 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, models.CASCADE)
+    post = models.ForeignKey(Post, models.CASCADE, null=True)
     author = models.ForeignKey(User, models.CASCADE)
     content = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True, blank=True)
+    parent = models.ForeignKey("self", models.CASCADE, 'replies', null=True)
 
     class Meta:
         ordering = ['-date_created']

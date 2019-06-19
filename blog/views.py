@@ -126,3 +126,12 @@ def create_comment(request, post_pk):
     comment.save()
     post.comment_set.add(comment)
     return redirect('blog:post_view', pk=post_pk)
+
+
+def comment_reply(request, post_pk, comment_pk):
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    author = request.user
+    content = request.POST['content']
+    reply = Comment(author=author, content=content, parent=comment)
+    reply.save()
+    return redirect('blog:post_view', pk=post_pk)
