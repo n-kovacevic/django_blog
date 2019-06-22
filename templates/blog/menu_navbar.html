@@ -1,3 +1,4 @@
+{% load avatar_tags %}
 <div class="ui fixed menu">
     <div class="ui container">
                 <div id="hamburger" class="item">
@@ -20,6 +21,7 @@
                 </div>
                 {% if user.is_authenticated %}
                     <div id="profile_dropdown" class="ui dropdown item">
+                        {% avatar user class="ui spaced avatar image" id="navbar-avatar" %}
                         <span class="text">{{ user.username }}</span>
                         <i class="dropdown icon"></i>
                         <div class="menu">
@@ -27,9 +29,6 @@
                             <a href="{% url 'accounts:logout' %}?next={{ request.path }}" class="item">Log out</a>
                         </div>
                     </div>
-                    <script>
-                    $('#profile_dropdown').dropdown();
-                    </script>
                 {% else %}
                     <a class="ui item" href="{% url 'accounts:login'%}?next={% url 'blog:home' %}">Log in</a>
                     <a class="ui item" href="{% url 'accounts:register'%}">Register</a>
@@ -37,8 +36,3 @@
             </div>
     </div>
 </div>
-<script>
-    $('#hamburger').click(function () {
-        $('#sidebar').sidebar('toggle');
-    });
-</script>

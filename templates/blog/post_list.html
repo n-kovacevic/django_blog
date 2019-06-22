@@ -1,5 +1,5 @@
 {% extends 'blog/base.html' %}
-
+{% load avatar_tags %}
 {% block title %}Blog{% endblock %}
 {% block content %}
     <div class="ui text container">
@@ -16,12 +16,11 @@
                 </div>
                 <div class="ui secondary segment equal width grid">
                     <div class="column">
-                        <i class="user outline icon"></i>
+                        {% avatar post.author class="ui avatar image"%}
                         {{ post.author.username }}
                     </div>
                     <div class="right aligned column">
-                        <i class="calendar alternate outline icon"></i>
-                        {{ post.date_created|timesince }} ago
+                        Posted {{ post.date_created|timesince }} ago
                     </div>
                 </div>
             </div>

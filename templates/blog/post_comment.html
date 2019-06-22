@@ -1,4 +1,8 @@
+{% load avatar_tags %}
 <div class="comment">
+    <div class="avatar">
+        {% avatar comment.author %}
+    </div>
     <div class="content">
         <span class="author">
             {{ comment.author.username }}

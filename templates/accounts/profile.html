@@ -1,13 +1,25 @@
 {% extends 'blog/base.html' %}
+{% load avatar_tags %}
 {% block content %}
     <div class="ui text container">
         <form method="post" class="ui form segment">
             {% csrf_token %}
-            {% include 'blog/form_field.html' with field=form.username icon='user icon' %}
-            <div class="field">
-                <label>Password:</label>
-                <div class="ui message">
-                    Raw passwords are not stored, so there is no way to see this user's password, but you can change the password using <a href="{% url 'accounts:password' %}">this form</a>.
+            <div class="fields">
+                <div class="ui medium bordered image field"
+                       data-tooltip="Change profile picture"
+                       data-position="bottom center" >
+                    <a class="popup" href="{% url 'avatar_change' %}">
+                        {% avatar user 200 %}
+                    </a>
+                </div>
+                <div class="field">
+                    {% include 'blog/form_field.html' with field=form.username icon='user icon' %}
+                    <div class="field">
+                        <label>Password:</label>
+                        <div class="ui message">
+                            Raw passwords are not stored, so there is no way to see this user's password, but you can change the password using <a href="{% url 'accounts:password' %}">this form</a>.
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="two fields">
