@@ -1,7 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% block title %}{{ post.title }}{% endblock %}
-{% load utils %}
+{% load utils avatar_tags %}
 {% block content %}
     <div class="ui text container segments">
         <div class="ui segment">
@@ -30,12 +30,11 @@
         </div>
         <div class="ui tertiary segment equal width grid">
             <div class="column">
-                <i class="user outline icon"></i>
+                {% avatar post.author class="ui avatar image"%}
                 {{ post.author.username }}
             </div>
             <div class="right aligned column">
-                <i class="calendar alternate outline icon"></i>
-                {{ post.date_created|timesince }} ago
+                Posted {{ post.date_created|timesince }} ago
             </div>
         </div>
         <div class="ui secondary segment">
@@ -65,15 +64,4 @@
             </div>
         </div>
     </div>
-    <script>
-        $('.reply').click(function (e) {
-            let comment_id = e.target.id.replace('reply-', '');
-            if ($(e.target).hasClass("active")){
-                $(e.target).removeClass("active");
-            } else {
-                $(e.target).addClass("active");
-            }
-            $('#reply-form-'+comment_id).slideToggle();
-        });
-    </script>
 {% endblock %}

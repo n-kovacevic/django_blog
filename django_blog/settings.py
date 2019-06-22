@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'avatar',
     'accounts.apps.AccountsConfig',
     'blog.apps.BlogConfig',
     'django.contrib.admin',
@@ -122,3 +123,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    '/var/www/djang_blog/static/',
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/var/www/django_blog/media/'
+
+AVATAR_AUTO_GENERATE_SIZES = (80, 200)
+AVATAR_THUMB_FORMAT = 'PNG'

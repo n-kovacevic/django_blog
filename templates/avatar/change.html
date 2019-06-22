@@ -1,0 +1,41 @@
+{% extends 'blog/../blog/base.html' %}
+{% load avatar_tags %}
+{% block title %}Change avatar{% endblock %}
+{% block content %}
+    <div class="ui text container">
+        <div class="ui horizontal segments">
+            <div class="ui circular segment">
+                <h4 class="ui header">Your current avatar</h4>
+                {% avatar user 200 %}
+            </div>
+            {% if not avatars %}
+                <div class="ui circular segment">
+                    <h4 class="ui header">Choose from previous avatars</h4>
+                    <div class="ui message">You haven't uploaded an avatar yet.</div>
+                </div>
+            {% else %}
+                <form method="post" class="ui circular form segment" action="{% url 'avatar_change' %}">
+                    <h4 class="ui header">Choose from previous avatars</h4>
+                    <div class="inline fields" id="avatar-choice">
+                    {% for c in primary_avatar_form.choice %}
+                        {% include 'blog/../blog/form_field.html' with field=c %}
+                    {% endfor %}
+                    </div>
+                    <p>
+                        {% csrf_token %}
+                        <input class="ui primary basic button" type="submit" value="Choose avatar" >
+                    </p>
+                </form>
+            {% endif %}
+        </div>
+        <form enctype="multipart/form-data" method="post" class="ui form segment" action="{% url 'avatar_add' %}">
+            <h4 class="ui header">Upload new avatar</h4>
+            {% csrf_token %}
+            <div class="field">
+                {{ upload_avatar_form.avatar }}
+            </div>
+            <input class="ui primary basic button" type="submit" value="Upload New Image" >
+            </p>
+        </form>
+    </div>
+{% endblock %}
