@@ -1,24 +1,22 @@
-{% extends 'accounts/base.html' %}
+{% extends 'blog/base.html' %}
 {% block title %}
     Register
 {% endblock %}
 {% block content %}
-    <div class="ui huge header">
-        <i class="user circle outline icon"></i>
-        <div class="content">Register</div>
-    </div>
-    <form method="post" class="ui form">
-        <div class="ui segment">
-            {% csrf_token %}
-            {% include 'blog/form_field.html' with field=form.username icon='user icon' %}
-            {% include 'blog/form_field.html' with field=form.password1 icon='lock icon' %}
-            {% include 'blog/form_field.html' with field=form.password2 icon='lock icon' %}
-            {% include 'blog/form_errors.html' %}
-            <input class="ui large fluid blue button" type="submit" value="Register">
+<div class="ui text container" >
+    <form method="post" class="ui form padded segment" id="account-form">
+        <h1><i class="user circle outline icon"></i><span>Register</span></h1>
+        {% csrf_token %}
+        {% include 'blog/form_field.html' with field=form.username icon='user icon' %}
+        {% include 'blog/form_field.html' with field=form.password1 icon='lock icon' %}
+        {% include 'blog/form_field.html' with field=form.password2 icon='lock icon' %}
+        {% include 'blog/form_errors.html' %}
+        <input class="ui large fluid blue button" type="submit" value="Register">
+
+        <div class="ui message">
+            Already have account?
+            <a href="{% url 'accounts:login' %}" >Log in</a>
         </div>
     </form>
-    <div class="ui center aligned message">
-        Already have account?
-        <a href="{% url 'accounts:login' %}" >Log in</a>
-    </div>
+</div>
 {% endblock %}

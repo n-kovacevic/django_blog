@@ -1,24 +1,24 @@
-{% extends 'accounts/base.html' %}
+{% extends 'blog/base.html' %}
 {% block title %}Log in{% endblock %}
 
 {% block content %}
+<div class="ui text container" >
 
-    <div class="ui huge header">
-        <i class="user circle outline icon"></i>
-        <div class="content">Log in</div>
-    </div>
-    <form method="post" class="ui form">
-        <div class="ui segment">
+    <form method="post" class="ui form padded segment" id="account-form">
+            <h1 >
+                <i class="user circle outline icon"></i>
+                <span>Log in</span>
+            </h1>
             {% csrf_token %}
             {% include 'blog/form_field.html' with field=form.username icon='user icon' %}
             {% include 'blog/form_field.html' with field=form.password icon='lock icon' %}
             {% include 'blog/form_errors.html' %}
             <input class="ui large fluid blue button" type="submit" value="Log in">
-        </div>
-    </form>
-    <div class="ui center aligned message">
-        Don't have account?
-        <a href="{% url 'accounts:register' %}" >Sign up</a>
-    </div>
 
+            <div class="ui message">
+                Don't have account?
+                <a href="{% url 'accounts:register' %}" >Sign up</a>
+            </div>
+    </form>
+</div>
 {% endblock %}
