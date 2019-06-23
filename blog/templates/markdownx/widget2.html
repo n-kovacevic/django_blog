@@ -1,17 +1,15 @@
 <div class="markdownx">
-    <div class="field">
+    <div class="ui top attached tabular menu" id="markdown-tabs">
+        <div class="active item" data-tab="markdown">Markdown</div>
+        <div class="item" data-tab="preview">Preview</div>
+    </div>
+    <div class="ui bottom attached active tab segment" data-tab="markdown">
         {% include 'django/forms/widgets/textarea.html' %}
     </div>
-    <div class="ui accordion field">
-        <div class="title">
-            <i class="dropdown icon"></i>
-            Preview:
-        </div>
-        <div class="content field">
-            <div class="markdownx-preview ui segment"></div>
-        </div>
+    <div class="ui bottom attached tab segment" data-tab="preview">
+        <div class="markdownx-preview ui segment"></div>
     </div>
 </div>
 <script>
-    $('.accordion').accordion();
+    $('#markdown-tabs .item').tab();
 </script>
