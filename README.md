@@ -4,6 +4,6 @@ Simple blog written using Django web framework
 
 ## Features
 - User accounts
-- Markdown formated posts
+- Markdown formatted posts
 - Post filtering by tag
 - Post comments
